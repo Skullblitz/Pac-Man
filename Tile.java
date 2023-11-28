@@ -6,14 +6,20 @@ import javax.swing.*;
 public class Tile {
     private int type;
     private int x,y;
+    private Player pac;
 
     public Tile(int t,int r, int c){
         type = t;
         x = r;
         y = c;
+        pac = new Player(0,0);
     }
     public void paint(Graphics window){
         window.setColor(Color.BLUE);
+        //-99 == Pac Man
+        if(type == -99){
+            pac.setLoc(x,y);
+        }
         //-1 == door left
         if(type == -1){
             window.setColor(Color.yellow);
@@ -111,6 +117,7 @@ public class Tile {
             window.fillRect(x,y+59,64,5);
             window.fillRect(x,y,64,5);
         }
+
 
     }
 }

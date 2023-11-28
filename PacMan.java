@@ -1,7 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.security.Key;
 import java.util.ArrayList;
 
@@ -12,11 +16,22 @@ public class PacMan extends JPanel implements Runnable, KeyListener {
     private int width, height;
 
     private ArrayList<Tile> tiles;
+    private BufferedImage spriteSheet;
+
+    private final int spriteWidth = 15; // Width of each individual sprite
+    private final int spriteHeight = 15; // Height of each individual sprite
     public PacMan(int level){
+        try {
+            // Load the sprite sheet image
+            spriteSheet = ImageIO.read(new File("Arcade - Pac-Man - General Sprites.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setBackground(Color.BLACK);
         tiles = new ArrayList<>();
         /*
         Key
+        -99 == Pac Man
         1 == top left corner
         2 == top edge
         3 == top right corner
@@ -44,7 +59,7 @@ public class PacMan extends JPanel implements Runnable, KeyListener {
             height = 8*64;
             map = new int[][]{
                 {1,2,-3,2,2,2,2,3},
-                {8,12,0,10,15,15,9,4},
+                {8,12,-99,10,15,15,9,4},
                 {8,14,0,0,0,0,0,4},
                 {8,7,9,0,10,3,0,4},
                 {-1,0,0,0,0,7,9,-2},
@@ -71,6 +86,7 @@ public class PacMan extends JPanel implements Runnable, KeyListener {
         for(Tile x : tiles){
             x.paint(window);
         }
+        //window.drawImage(spriteSheet,0,0,this);
     }
     public void run()
     {
