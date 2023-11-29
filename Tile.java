@@ -6,19 +6,21 @@ import javax.swing.*;
 public class Tile {
     private int type;
     private int x,y;
-    private Player pac;
+    private Pac player;
 
     public Tile(int t,int r, int c){
         type = t;
         x = r;
         y = c;
-        pac = new Player(0,0);
+
     }
     public void paint(Graphics window){
         window.setColor(Color.BLUE);
         //-99 == Pac Man
         if(type == -99){
-            pac.setLoc(x,y);
+            if(player == null)
+                player = new Pac(x+8,y+8,48,48,1);
+            player.paintComponent(window);
         }
         //-1 == door left
         if(type == -1){
