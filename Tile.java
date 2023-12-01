@@ -8,18 +8,19 @@ public class Tile {
     private int x,y;
     private Pac player;
 
-    public Tile(int t,int r, int c){
+    public Tile(int t,int r, int c, Pac p){
         type = t;
         x = r;
         y = c;
+        player = p;
 
     }
     public void paint(Graphics window){
         window.setColor(Color.BLUE);
         //-99 == Pac Man
         if(type == -99){
-            if(player == null)
-                player = new Pac(x+8,y+8,48,48,1);
+            //if(player == null)
+                //player = new Pac(x+8,y+8,48,48,1);
             player.paintComponent(window);
         }
         //-1 == door left

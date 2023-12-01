@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.security.Key;
 import java.util.ArrayList;
 
 
@@ -17,16 +16,17 @@ public class PacMan extends JPanel implements Runnable, KeyListener {
 
     private ArrayList<Tile> tiles;
     private BufferedImage spriteSheet;
+    private Pac player;
 
     private final int spriteWidth = 15; // Width of each individual sprite
     private final int spriteHeight = 15; // Height of each individual sprite
     public PacMan(int level){
-        try {
-            // Load the sprite sheet image
-            spriteSheet = ImageIO.read(new File("Arcade - Pac-Man - General Sprites.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            // Load the sprite sheet image
+//            spriteSheet = ImageIO.read(new File("Arcade - Pac-Man - General Sprites.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         setBackground(Color.BLACK);
         tiles = new ArrayList<>();
         /*
@@ -72,7 +72,13 @@ public class PacMan extends JPanel implements Runnable, KeyListener {
         //Making level
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map[row].length; col++) {
-                tiles.add(new Tile(map[col][row],row*64, col*64));
+                if(map[row][col] == -99){
+                    System.out.println("-99");
+                    if(player == null)
+                        player = new Pac(row*64,col*64,48,48,1);
+                    tiles.add(new Tile(map[col][row],row*64, col*64,player));
+                }else
+                    tiles.add(new Tile(map[col][row],row*64, col*64,player));
             }
         }
         addKeyListener( this );   	//
@@ -110,7 +116,30 @@ public class PacMan extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+            //Image img1 = Toolkit.getDefaultToolkit().getImage("right.png"); /*the image cannot be in the SRC folder*/
+            player.right();
+            System.out.println("RIGHT");
+            repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT ) {
+            //Image img1 = Toolkit.getDefaultToolkit().getImage("left.png"); /*the image cannot be in the SRC folder*/
+            player.left();
+            System.out.println("LEFT");
+            repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_UP ) {
+            //Image img1 = Toolkit.getDefaultToolkit().getImage("left.png"); /*the image cannot be in the SRC folder*/
+            player.up();
+            System.out.println("UP");
+            repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN ) {
+            //mage img1 = Toolkit.getDefaultToolkit().getImage("left.png"); /*the image cannot be in the SRC folder*/
+            player.down();
+            System.out.println("DOWN");
+            repaint();
+        }
     }
 
     @Override

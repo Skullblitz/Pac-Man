@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class Pac extends JPanel implements KeyListener
 {
     private int x, y, w, h, speed;  //these are instance variables
-    boolean u,r,d,l;
+    public boolean u,r,d,l;
 
 
     //this is the constructor
@@ -16,6 +16,10 @@ public class Pac extends JPanel implements KeyListener
         y = wy;
         w = wd;
         h = ht;
+        r = false;
+        d = true;
+        l = false;
+        u = false;
         this.speed = speed;
 
         addKeyListener( this ); /*all keyListeners must have this in the constructor*/
@@ -25,10 +29,7 @@ public class Pac extends JPanel implements KeyListener
 
     public void paintComponent( Graphics window )
     {
-        r = false;
-        d = true;
-        l = false;
-        u = false;
+
 
 
         //this rectangle shows you the boundaries of what you are drawing
@@ -74,16 +75,32 @@ public class Pac extends JPanel implements KeyListener
     }
 
     public void right(){
-        x+=speed; r = true;
+        x+=speed;
+        r = true;
+        l = false;
+        u = false;
+        d = false;
     }
     public void up(){
-        y-=speed;u = true;
+        y-=speed;
+        r = false;
+        l = false;
+        u = true;
+        d = false;
     }
     public void left(){
-        x-=speed; l = true;
+        x-=speed;
+        r = false;
+        l = true;
+        u = false;
+        d = false;
     }
     public void down(){
-        y+=speed; d = true;
+        y+=speed;
+        r = false;
+        l = false;
+        u = false;
+        d = true;
     }
 
 
@@ -93,6 +110,7 @@ public class Pac extends JPanel implements KeyListener
     /*2*/
     public void keyPressed(KeyEvent e)
     {
+        System.out.println("LEFT");
         /*KeyEvent key codes: https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html */
 
         if(e.getKeyCode() == KeyEvent.VK_RIGHT ) {
@@ -101,6 +119,7 @@ public class Pac extends JPanel implements KeyListener
             l = false;
             u = false;
             d = false;
+            System.out.println("RIGHT");
             repaint();
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT ) {
@@ -121,7 +140,7 @@ public class Pac extends JPanel implements KeyListener
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN ) {
             //mage img1 = Toolkit.getDefaultToolkit().getImage("left.png"); /*the image cannot be in the SRC folder*/
-            r = true;
+            r = false;
             l = false;
             u = false;
             d = true;
