@@ -1,15 +1,16 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class PacManRunner extends JFrame {
 
-    private static final int WIDTH = 360;
-    private static final int HEIGHT = 360;
+    private static final int WIDTH = 408;
+    private static final int HEIGHT = 408;
 
     public PacManRunner(){
         super("Pac-Man");
 
         setSize(WIDTH,HEIGHT);
-
+        setBackground(Color.BLACK);
 
         setUndecorated(true);
         setLocationRelativeTo(null);
