@@ -1,5 +1,6 @@
 1. Fix ghost images
 2. Ghost Collision
+3. Constant Movement (Doesn't stop when you don't press WASD)
 2. Fix PacMan movement images
 3. Add Points Counter on screen
 4. Add a "Start game" space command
