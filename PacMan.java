@@ -139,18 +139,38 @@ public class PacMan extends JPanel implements KeyListener{
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
                 newPacManY--;
+                try {
+                    pacmanImage = loadImage("PacMan Up.png");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
                 newPacManY++;
+                try {
+                    pacmanImage = loadImage("PacMan Down.png");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
                 newPacManX--;
+                try {
+                    pacmanImage = loadImage("PacMan Left.png");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
                 newPacManX++;
+                try {
+                    pacmanImage = loadImage("PacMan Right.png");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 break;
             case KeyEvent.VK_SPACE:
                 System.out.println(score);
