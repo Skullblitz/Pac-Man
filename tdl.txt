@@ -1,0 +1,6 @@
+1. Fix ghost images
+2. Ghost Collision
+2. Fix PacMan movement images
+3. Add Points Counter on screen
+4. Add a "Start game" space command
+5. Add a "You won" screen.
