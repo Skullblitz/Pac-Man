@@ -111,6 +111,8 @@ public class PacMan extends JPanel implements KeyListener{
                         levelData[pacMan[1]][pacMan[0]] = -1;
                         score++;
                         remaining--;
+                        clearScoreArea(window);
+                        drawScore(window);
                     }
                 }
             }
@@ -129,6 +131,17 @@ public class PacMan extends JPanel implements KeyListener{
             // Draws the PacMan
             if (pacmanImage != null) {
                 window.drawImage(pacmanImage, pacMan[0] * block_size + block_size, pacMan[1] * block_size + block_size, block_size, block_size, null);
+            }
+
+            // Draws score, had to create a clear score area method bcz the paint method is dumb and the numbers were overlapping.
+            private void clearScoreArea(Graphics window) {
+                window.setColor(Color.BLACK);
+                window.fillRect(65, screen_size - 20, 35, 30);
+            }
+            private void drawScore(Graphics window) {
+                window.setColor(Color.GREEN);
+                window.setFont(new Font("Arial", Font.BOLD, 14));
+                window.drawString("Score: " + score, 20, screen_size - 10);
             }
             for (int[] ghost : ghosts) {
                 if (pacMan[0] == ghost[0] && pacMan[1] == ghost[1]) {
